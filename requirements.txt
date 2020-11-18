@@ -1,7 +1,14 @@
+APScheduler==3.6.3
 certifi==2020.11.8
 chardet==3.0.4
+decorator==4.4.2
 idna==2.10
+jsonpath-ng==1.5.2
+ply==3.11
 pylast==4.0.0
 python-dotenv==0.15.0
+pytz==2020.4
 requests==2.25.0
+six==1.15.0
+tzlocal==2.1
 urllib3==1.26.2
