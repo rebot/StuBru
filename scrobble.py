@@ -75,7 +75,8 @@ def scrobble():
                 try: 
                     previous = user.get_recent_tracks(1, cacheable=False)[0].track
                 except IndexError:
-                    network[stream].update_now_playing(artiest, nummer)
+                    network[stream].scrobble(artiest, nummer, timestamp=time.time())
+                    logging.info(f'Nummer gescrobbled naar StuBru-{stream.capitalize()}: {artiest.capitalize()} - {nummer.capitalize()}')
                 else:
                     # Scrobble het nummer als het niet het laatste nummer is
                     if current.get_correction() != previous.title:
