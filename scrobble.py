@@ -84,7 +84,7 @@ def scrobble():
     current = network.get_track(artiest, nummer)
     previous = user.get_recent_tracks(1, cacheable=False)[0].track
 
-    if current.get_mbid() != previous.get_mbid():
+    if current.get_correction() != previous.title:
         network.scrobble(artiest, nummer, timestamp=time.time())
         logging.debug(f'Nummer gescrobbled: {artiest.capitalize()} - {nummer.capitalize()}')
     else:
