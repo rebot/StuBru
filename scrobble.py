@@ -173,7 +173,7 @@ def spotify():
 
 # In[2]: Start het clock process
 
-@sched.scheduled_job('interval', minutes=2)
+@sched.scheduled_job('interval', minutes=1)
 def timed_job():
     scrobble()
 
