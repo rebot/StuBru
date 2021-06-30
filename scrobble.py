@@ -26,7 +26,7 @@ logging.basicConfig(level=os.getenv('LOGLEVEL', 'INFO'))
 
 # Studio Brussel Streams
 status = 'http://icecast.vrtcdn.be/status-json.xsl'
-streams = ['bruut', 'tijdloze', 'hooray']
+streams = ['bruut', 'tijdloze', 'hooray', 'belgisch']
 
 LASTFM_API_KEY = os.getenv('LASTFM_API_KEY')
 LASTFM_API_SECRET = os.getenv('LASTFM_API_SECRET')
@@ -120,7 +120,8 @@ def spotify():
     playlists = {
         'bruut': 'StuBru | Bruut',
         'tijdloze': 'StuBru | De Tijdloze',
-        'hooray': 'StuBru | Hooray'
+        'hooray': 'StuBru | Hooray',
+        'belgisch': 'StuBru | #ikluisterbelgisch'
     }
 
     # Haal de playlijsten op van de huidige gebruiker
