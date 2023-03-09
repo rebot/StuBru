@@ -12,7 +12,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-logging.basicConfig(level=os.getenv('LOGLEVEL', 'INFO'))
+logger = logging.getLogger()
+
+hnd = logging.StreamHandler(sys.stdout)
+frm = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+hnd.setFormatter(frm)
+
+logger.addHandler(hnd)
+logger.setLevel(logging.DEBUG)
 
 # In[1]: Algemene instellingen
 
@@ -35,7 +42,7 @@ def scrobble():
         username = LASTFM_USERNAME, 
         password_hash = pylast.md5(LASTFM_PASSWORD)
     )
-    logging.debug(network.get_authenticated_user())
+    logger.debug(network.get_authenticated_user())
 
     with requests.Session() as s:
         # Haal de stream op uit de status pagina    
@@ -54,11 +61,11 @@ def scrobble():
                 if m: 
                     artiest = m.group(1).lower()
                     nummer = m.group(2).lower()
-                    logging.debug('Studio Brusssel - Artiest: {artiest} - Nummer: {nummer}')
+                    logger.debug('Studio Brusssel - Artiest: {artiest} - Nummer: {nummer}')
                     sys.exit()
             # Controleer of een songtitel gevonden is
             if artiest is None and nummer is None:
-                logging.debug('Studio Brussel - Geen songtitel gevonden')
+                logger.debug('Studio Brussel - Geen songtitel gevonden')
                 sys.exit()
             # Scrobble de nummer naar last.fm
             user = network.get_authenticated_user()
@@ -67,14 +74,14 @@ def scrobble():
                 previous = user.get_recent_tracks(1, cacheable=False)[0].track
             except IndexError:
                 network.scrobble(artiest, nummer, timestamp=time.time())
-                logging.info(f'Nummer gescrobbled naar Studio Brussel: {artiest.capitalize()} - {nummer.capitalize()}')
+                logger.info(f'Nummer gescrobbled naar Studio Brussel: {artiest.capitalize()} - {nummer.capitalize()}')
             else:
                 # Scrobble het nummer als het niet het laatste nummer is
                 if current.get_correction() != previous.title:
                     network.scrobble(artiest, nummer, timestamp=time.time())
-                    logging.info(f'Nummer gescrobbled naar Studio Brussel: {artiest.capitalize()} - {nummer.capitalize()}')
+                    logger.info(f'Nummer gescrobbled naar Studio Brussel: {artiest.capitalize()} - {nummer.capitalize()}')
                 else:
-                    logging.debug(f'Geen nieuw nummer...')
+                    logger.debug(f'Geen nieuw nummer...')
                 # Update now-playing
                 network.update_now_playing(artiest, nummer)
 
