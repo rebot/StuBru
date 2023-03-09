@@ -61,7 +61,7 @@ def scrobble():
                 if m: 
                     artiest = m.group(1).lower()
                     nummer = m.group(2).lower()
-                    logger.debug('Studio Brusssel - Artiest: {artiest} - Nummer: {nummer}')
+                    logger.debug(f'Studio Brusssel - Artiest: {artiest} - Nummer: {nummer}')
                     sys.exit()
             # Controleer of een songtitel gevonden is
             if artiest is None and nummer is None:
