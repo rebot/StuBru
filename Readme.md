@@ -1,5 +1,7 @@
 # Studio Brussel | Last.fm Scrobbler
 
+> UPDATE: Code adapted to run on Github Actions - README Should be updated as well (WIP)
+
 Een tweetal jaar terug bezorgde ik [Last.fm] van een [Studio Brussel](https://www.last.fm/user/Studio-Brussel) pagina waarop heden meer dan 275 000 tracks werden gescrobbled. Op aanvraag maak ik nu een gelijkaardige pagina voor `Bruut`, de harde gitaren muziek stream van Studio Brussel. 
 
 ## Open Source en Freeware
